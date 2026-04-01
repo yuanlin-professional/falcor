@@ -1,0 +1,43 @@
+# SpectrumUtilsTests.cs.slang 源码文档
+
+> 路径: `Source/Tools/FalcorTest/Tests/Utils/Color/SpectrumUtilsTests.cs.slang`
+> 类型: Slang 着色器
+> 模块: Tools/FalcorTest/Tests/Utils/Color
+
+## 功能概述
+
+测试光谱工具函数，包括 CIE 标准观察者函数和色度转换。
+
+## 常量缓冲区
+
+- `CB`: 常量缓冲区
+
+
+## 资源绑定
+
+| 资源名称 | 类型 | 说明 |
+|----------|------|------|
+| `wavelengths` | `StructuredBuffer` | 着色器资源 |
+| `result` | `RWStructuredBuffer` | 着色器资源 |
+
+
+## 函数
+
+| 函数名 | 线程组大小 | 说明 |
+|--------|-----------|------|
+| `testWavelengthToXYZ` | [256, 1, 1] | 计算着色器入口点 |
+
+
+## 依赖关系 / import
+
+- `Utils.Color.SpectrumUtils`
+
+
+### 关联 C++ 测试
+
+- [`SpectrumUtilsTests.cpp`](SpectrumUtilsTests.md)
+
+
+## 实现细节
+
+本着色器文件使用 Slang 语言编写，属于 Falcor 测试套件的 GPU 端代码。通常由对应的 C++ 测试文件调用 `ctx.createProgram()` 加载执行。

@@ -1,0 +1,235 @@
+# PBRTImporter
+
+这是一个用于 pbrt-v4 场景文件的场景导入器。
+Falcor 仅支持 pbrt-v4 中实现的非常有限的功能子集，
+因此场景转换远非完美。下面的列表概述了此导入器当前支持的对象和参数。
+
+## 支持的对象 / 参数
+
+- Cameras
+  - [x] `perspective`
+    - [x] `lensradius`
+    - [x] `focaldistance`
+    - [ ] `frameaspectratio`
+    - [ ] `screenwindow`
+  - [ ] `orthographic`
+    - [ ] `lensradius`
+    - [ ] `focaldistance`
+    - [ ] `frameaspectratio`
+    - [ ] `screenwindow`
+  - [ ] `realistic`
+    - [ ] `lensfile`
+    - [ ] `aperturediameter`
+    - [ ] `focusdistance`
+    - [ ] `aperture`
+  - [ ] `spherical`
+    - [ ] `lensradius`
+    - [ ] `focaldistance`
+    - [ ] `frameaspectratio`
+    - [ ] `screenwindow`
+    - [ ] `mapping`
+- Lights
+  - [ ] `point`
+    - [ ] `I`
+    - [ ] `scale`
+    - [ ] `power`
+    - [ ] `from`
+  - [ ] `spot`
+    - [ ] `I`
+    - [ ] `scale`
+    - [ ] `power`
+    - [ ] `coneangle`
+    - [ ] `conedeltaangle`
+    - [ ] `from`
+    - [ ] `to`
+  - [ ] `goniometric`
+    - [ ] `I`
+    - [ ] `scale`
+    - [ ] `filename`
+    - [ ] `power`
+  - [ ] `projection`
+    - [ ]`scale`
+    - [ ]`power`
+    - [ ]`fov`
+    - [ ]`filename`
+  - [x] `distant`
+    - [x] `L`
+    - [x] `scale`
+    - [x] `from`
+    - [x] `to`
+    - [x] `illuminance`
+  - [x] `infinite`
+    - [x] `L`
+    - [x] `scale`
+    - [ ] `portal`
+    - [x] `filename`
+    - [ ] `illuminance`
+- Textures
+  - [x] `constant`
+    - [x] `value`
+  - [ ] `scale`
+    - [ ] `tex`
+    - [ ] `scale`
+  - [ ] `mix`
+    - [ ] `tex1`
+    - [ ] `tex2`
+    - [ ] `amount`
+  - [ ] `directionmix`
+    - [ ] `tex1`
+    - [ ] `tex2`
+    - [ ] `dir`
+  - [ ] `bilerp`
+    - [ ] `v00`
+    - [ ] `v01`
+    - [ ] `v10`
+    - [ ] `v11`
+  - [x] `imagemap`
+    - [x] `filename`
+    - [x] `filter` (支持: `bilinear`, `trilinear`, 不支持: `ewa`, `point`)
+    - [x] `encoding` (支持: `linear`, `sRGB`, 不支持: `gamma X`)
+    - [ ] `maxanisotropy`
+    - [ ] `wrap`
+    - [ ] `scale`
+    - [ ] `invert`
+  - [ ] `checkerboard`
+    - [ ] `tex1`
+    - [ ] `tex2`
+    - [ ] `dimension`
+  - [ ] `dots`
+    - [ ] `inside`
+    - [ ] `outside`
+  - [ ] `marble`
+    - [ ] `octaves`
+    - [ ] `roughness`
+    - [ ] `scale`
+    - [ ] `variation`
+  - [ ] `fbm`
+    - [ ] `octaves`
+    - [ ] `roughness`
+  - [ ] `wrinkled`
+    - [ ] `octaves`
+    - [ ] `roughness`
+  - [ ] `windy`
+  - [ ] `ptex`
+    - [ ] `filename`
+    - [ ] `encoding`
+    - [ ] `scale`
+- Materials
+  - [x] `diffuse`
+    - [x] `reflectance`
+  - [x] `coateddiffuse`
+    - [x] `reflectance`
+    - [x] `uroughness` / `vroughness` / `roughness` / `remaproughness` (仅支持常量各向同性值)
+    - [ ] `thickness`
+    - [ ] `eta`
+    - [ ] `maxdepth`
+    - [ ] `nsamples`
+    - [ ] `g`
+    - [ ] `albedo`
+    - [ ] `displacement`
+  - [x] `conductor`
+    - [x] `eta` (仅支持常量值)
+    - [x] `k` (仅支持常量值)
+    - [x] `reflectance` (仅支持常量值)
+    - [x] `uroughness` / `vroughness` / `roughness` / `remaproughness` (仅支持常量各向同性值)
+    - [ ] `displacement`
+  - [x] `coatedconductor`
+    - [x] `interface.uroughness` / `interface.vroughness` / `interface.roughness` (仅支持常量各向同性值)
+    - [ ] `thickness`
+    - [x] `interface.eta` (仅支持常量值)
+    - [x] `conductor.uroughness` / `conductor.vroughness` / `conductor.roughness` (仅支持常量各向同性值)
+    - [x] `conductor.eta` / `conductor.k` (仅支持常量值)
+    - [x] `reflectance` (仅支持常量值)
+    - [ ] `maxdepth`
+    - [ ] `nsamples`
+    - [ ] `g`
+    - [ ] `albedo`
+    - [ ] `displacement`
+    - [x] `remaproughness`
+  - [x] `dielectric`
+    - [x] `eta` (仅支持常量值)
+    - [x] `uroughness` / `vroughness` / `roughness` / `remaproughness` (仅支持常量各向同性值)
+    - [ ] `displacement`
+  - [x] `thindielectric`
+    - [x] `eta` (仅支持常量值)
+    - [ ] `displacement`
+  - [ ] `diffusetransmission`
+    - [ ] `reflectance`
+    - [ ] `transmittance`
+    - [ ] `scale`
+    - [ ] `displacement`
+  - [ ] `subsurface`
+  - [ ] `measured`
+  - [ ] `hair`
+  - [ ] `mix`
+- Media
+  - [ ] `homogeneous`
+    - [ ] `preset`
+    - [ ] `sigma_a`
+    - [ ] `sigma_s`
+    - [ ] `Le`
+    - [ ] `Lescale`
+    - [ ] `scale`
+    - [ ] `g`
+  - [ ] `uniformgrid`
+  - [ ] `rgbgrid`
+  - [ ] `cloud`
+  - [ ] `nanovdb`
+- Area lights
+  - [x] `diffuse`
+    - [x] `L`
+    - [x] `scale`
+    - [ ] `twosided`
+    - [ ] `power`
+    - [ ] `filename`
+- Shapes
+  - General attributes
+    - [ ] `alpha`
+  - [x] `sphere`
+    - [x] `radius`
+    - [ ] `zmin`
+    - [ ] `zmax`
+    - [ ] `phimax`
+  - [ ] `cylinder`
+    - [ ] `radius`
+    - [ ] `zmin`
+    - [ ] `zmax`
+    - [ ] `phimax`
+  - [x] `disk`
+    - [x] `radius`
+    - [x] `height`
+    - [ ] `innerradius`
+    - [ ] `phimax`
+  - [ ] `bilinearmesh`
+    - [ ] `indices`
+    - [ ] `P`
+    - [ ] `uv`
+    - [ ] `N`
+    - [ ] `faceIndices`
+    - [ ] `emissionfilename`
+  - [ ] `curve`
+    - [ ] `width`
+    - [ ] `width0`
+    - [ ] `width1`
+    - [ ] `degree`
+    - [ ] `basis`
+    - [ ] `P`
+    - [ ] `type`
+    - [ ] `N`
+    - [ ] `splitdepth`
+  - [x] `trianglemesh`
+    - [x] `indices`
+    - [x] `P`
+    - [x] `N`
+    - [x] `uv`
+    - [ ] `S`
+    - [ ] `faceIndices`
+  - [x] `plymesh`
+    - [x] `filename`
+    - [ ] `displacement`
+    - [ ] `displacement.edgelength`
+  - [x] `loopsubdiv`
+    - [x] `levels`
+    - [x] `indices`
+    - [x] `P`
+    - [ ] `scheme` (pbrt-v4 中也不支持)

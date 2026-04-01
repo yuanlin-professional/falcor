@@ -1,0 +1,56 @@
+# MicrofacetTests.cs.slang 源码文档
+
+> 路径: `Source/Tools/FalcorTest/Tests/Rendering/Materials/MicrofacetTests.cs.slang`
+> 类型: Slang 着色器
+> 模块: Tools/FalcorTest/Tests/Rendering/Materials
+
+## 功能概述
+
+测试微表面（Microfacet）BRDF 模型的评估和采样，验证 GGX 等法线分布函数的正确性。
+
+## 结构体与接口
+
+### `MicrofacetSamplingTest`
+
+结构体定义。
+
+
+## 资源绑定
+
+| 资源名称 | 类型 | 说明 |
+|----------|------|------|
+| `testWi` | `StructuredBuffer` | 着色器资源 |
+| `histogramSampling` | `RWStructuredBuffer` | 着色器资源 |
+| `histogramPdf` | `RWStructuredBuffer` | 着色器资源 |
+| `testWi` | `StructuredBuffer` | 着色器资源 |
+| `result1` | `RWStructuredBuffer` | 着色器资源 |
+| `result2` | `RWStructuredBuffer` | 着色器资源 |
+
+
+## 函数
+
+| 函数名 | 线程组大小 | 说明 |
+|--------|-----------|------|
+| `tabulateHistogram` | [256, 1, 1] | 计算着色器入口点 |
+| `tabulatePdf` | [16, 16, 1] | 计算着色器入口点 |
+| `sigmaIntegration` | [32, 1, 1] | 计算着色器入口点 |
+| `sigmaLambdaConsistency` | [32, 1, 1] | 计算着色器入口点 |
+| `lambdaNonsymmetry` | [32, 1, 1] | 计算着色器入口点 |
+| `g1Symmetry` | [32, 1, 1] | 计算着色器入口点 |
+
+
+## 依赖关系 / import
+
+- `Utils.Math.MathHelpers`
+- `Utils.Sampling.UniformSampleGenerator`
+- `Rendering.Materials.Microfacet`
+
+
+### 关联 C++ 测试
+
+- [`MicrofacetTests.cpp`](MicrofacetTests.md)
+
+
+## 实现细节
+
+本着色器文件使用 Slang 语言编写，属于 Falcor 测试套件的 GPU 端代码。通常由对应的 C++ 测试文件调用 `ctx.createProgram()` 加载执行。
